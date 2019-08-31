@@ -1,0 +1,234 @@
+/* 顶部导航栏区域 */
+.zh_nav {
+    width: 100%;
+    height: 40px;
+    background-color: #333;
+}
+
+.zh_nav ul {
+    float: left;
+}
+
+.zh_nav li {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+}
+
+.zh_nav li a {
+    color: #b0b0b0;
+}
+
+.zh_nav li a:hover {
+    color: #fff;
+}
+
+.zh_nav li span {
+    display: block;
+    width: 1px;
+    height: 13px;
+    background: rgb(95, 95, 95);
+    margin: 0 5px;
+    text-align: end;
+    margin-top: 15px;
+}
+
+.zh_nav_login {
+    float: right;
+}
+
+.zh_shop_car {
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #424242;
+    margin-left: 25px;
+    float: right;
+    text-align: center;
+}
+
+.zh_shop_car span {
+    color: #b0b0b0;
+}
+
+/* 顶部菜单区域 */
+.zh_top_menu {
+    margin-top: 22px;
+    text-align: center;
+    position: relative;
+}
+
+.zh_top_menu .w {
+    overflow: hidden;
+}
+
+.zh_left_logo {
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    background-color: #ff6700;
+    float: left;
+}
+
+.zh_middle_menus {
+    margin-left: 180px;
+    float: left;
+}
+
+.zh_middle_menus ul li {
+    float: left;
+    height: 55px;
+    line-height: 55px;
+    margin-right: 20px;
+}
+
+.zh_middle_menus ul li:last-child {
+    margin-right: 0;
+}
+
+.zh_middle_menus ul li a {
+    font-size: 15px;
+}
+
+/* 右侧搜索栏 */
+.zh_right_search {
+    width: 294px;
+    height: 48px;
+    border: 1px solid #e0e0e0;
+    float: right;
+}
+
+.zh_right_search .r_s_left {
+    text-align: right;
+    float: left;
+    width: 243px;
+    height: 50px;
+}
+
+.zh_right_search .r_s_left a {
+    margin-top: 15px;
+    display: inline-block;
+    height: 18px;
+    padding: 0 5px;
+    color: #757575;
+    background-color: #eee;
+}
+
+.zh_right_search .r_s_left a:last-child {
+    margin-right: 10px;
+}
+
+.zh_right_search .r_s_left a:hover {
+    color: #ff6700;
+}
+
+.zh_right_search .r_s_right {
+    width: 50px;
+    height: 48px;
+    border-left: 1px solid #e0e0e0;
+    float: left;
+    line-height: 48px;
+}
+
+.zh_right_search .r_s_right span {
+    color: #616161;
+    cursor: pointer;
+}
+
+/* 菜单栏隐藏区域 */
+.zh_menu_hidden {
+    width: 100%;
+    height: 230px;
+    background-color: #fff;
+    position: absolute;
+    top: 78px;
+    left: 0;
+    z-index: 1;
+    border-top: 1px solid #ccc;
+    box-shadow: 0 3px 5px #999;
+    display: none;
+}
+
+.zh_menu_hidden ul li {
+    float: left;
+    height: 230px;
+    padding-top: 35px;
+}
+
+.zh_menu_hidden ul li>span {
+    width: 1px;
+    height: 100px;
+    background-color: #ccc;
+    display: block;
+    margin: 0 26px 0;
+
+}
+
+.zh_menu_hidden ul li img {
+    height: 110px;
+}
+
+.zh_menu_hidden ul li a span {
+    display: block;
+    line-height: normal;
+}
+
+.zh_menu_hidden ul li a span:nth-child(2) {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.zh_item{
+    display: none;
+}
+
+/* 顶部banner图区域 */
+.zh_banner {
+    margin-top: 23px;
+    height: 460px;
+    position: relative;
+}
+
+.zh_b_imgs img {
+    width: 100%;
+}
+
+.zh_b_sideBar {
+    height: 100%;
+    width: 234px;
+    background-color: rgba(0, 0, 0, .5);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.zh_b_sideBar ul {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.zh_b_sideBar ul li {
+    padding: 0 25px 0 30px;
+    width: 100%;
+    box-sizing: border-box;
+    /* margin-top: 20px; */
+    overflow: hidden;
+    height: 42px;
+    line-height: 42px;
+}
+
+.zh_b_sideBar ul li:hover {
+    background-color: #ff6700;
+}
+
+.zh_b_sideBar ul li a {
+    font-size: 14px;
+    color: #fff;
+    float: left;
+}
+
+.zh_b_sideBar ul li span {
+    color: #fff;
+    float: right;
+    font-size: 20px;
+}
