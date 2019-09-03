@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        div {
+            margin-left: 500px;
+        }
+
+        .box1 {
+            margin-top: 100px;
+            width: 100px;
+            height: 50px;
+            background-color: red;
+            /* transition: all 3s linear; */
+        }
+
+        .box2 {
+            width: 100px;
+            height: 400px;
+            background-color: #ccc;
+            transition: all 1s linear;
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="box1">
+    </div>
+    <div class="box2"></div>
+
+
+    <script>
+        var box1 = document.querySelector('.box1');
+        var box2 = document.querySelector('.box2');
+
+
+        box1.onmouseenter = function () {
+            box2.style.height = 0;
+            // box2.style.opacity = 0;
+        }
+
+        box1.onmouseleave = function () {
+            box2.style.height = 400 + 'px';
+            // box2.style.opacity = 1;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        // 批量创建变量(对象的属性)
+        var spanParent = {}
+
+        for (var i = 0; i < 5; i++) {
+            spanParent['swSpan' + i] = document.querySelector('.box1');
+        }
+
+        console.log(spanParent);
+        // console.dir(spanParent.swSpan0);  //是对象
+    </script>
+</body>
+
+</html>

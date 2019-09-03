@@ -1,0 +1,144 @@
+/* 瞎搞
+.introduce {
+    width: 1226px;
+    position: fixed;
+    height: 0;
+    background: rgba(0, 0, 0, .5);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.introduce .push {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, .5);
+    position: absolute;
+    right: -50px;
+    bottom: -50px;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+@keyframes skip {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 400px;
+    }
+}
+
+@keyframes skip1 {
+    from {
+        height: 400px;
+    }
+
+    to {
+        height: 200px;
+    }
+}
+
+@keyframes skip2 {
+    from {
+        height: 200px;
+    }
+
+    to {
+        height: 400px;
+    }
+}
+
+@keyframes skip3 {
+    from {
+        height: 400px;
+    }
+
+    to {
+        height: 300px;
+    }
+}
+
+@keyframes skip4 {
+    from {
+        height: 300px;
+    }
+
+    to {
+        height: 400px;
+    }
+}
+
+@keyframes skip5 {
+    from {
+        height: 400px;
+    }
+
+    to {
+        height: 350px;
+    }
+}
+
+@keyframes skip6 {
+    from {
+        height: 350px;
+    }
+
+    to {
+        height: 400px;
+    }
+}
+
+
+.getSkip {
+    animation: skip .5s linear forwards;
+}
+
+.getSkip1 {
+    animation: skip1 5s linear forwards;
+}
+
+.getSkip2 {
+    animation: skip2 4s linear forwards;
+}
+
+.getSkip3 {
+    animation: skip3 3s linear forwards;
+}
+
+.getSkip4 {
+    animation: skip4 2s linear forwards;
+}
+
+.getSkip5 {
+    animation: skip5 1s linear forwards;
+}
+
+.getSkip6 {
+    animation: skip6 .5s linear forwards;
+} */
+
+
+@keyframes upSlide {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 97px;
+    }
+}
+
+@keyframes downSlide {
+    from {
+        height: 97px;
+    }
+
+    to {
+        height: 0px;
+    }
+}
