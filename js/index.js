@@ -5,6 +5,7 @@ window.onload = function () {
         init: function () {
 
 
+
             // 获取页面元素
             // this.getElement();
 
@@ -14,6 +15,11 @@ window.onload = function () {
             // 注册事件
             this.addEvent();
 
+            // 用于小米闪购
+            this.flag = true;
+
+            // 页面刷新后就需要执行计算秒杀时间
+            this.fastKill();
 
 
             // console.dir(mi_home);
@@ -109,7 +115,7 @@ window.onload = function () {
                     self.downSlide(scSpan[1], Math.floor(Math.random() * (25 - 7) + 7));
                     self.downSlide(scSpan[2], Math.floor(Math.random() * (15 - 7) + 7));
 
-                    if (self.getTimes() - time >= 3000) {
+                    if (self.getTimes() - time >= 1000) {
                         shop_car_hidden.firstElementChild.style.display = 'none';
                         scTips.style.display = 'block';
                     }
@@ -285,6 +291,7 @@ window.onload = function () {
             var v1 = document.getElementById('start_play');
             var v1_p = document.querySelector('.hidden_video video');
             var v1_w = document.querySelector('.hidden_video');
+            var cover = document.querySelector('.cover');
 
             v1.onclick = function () {
                 // console.log('事件触发！');
@@ -293,7 +300,10 @@ window.onload = function () {
                 v1_p.load();
                 v1_p.play();
 
-                console.log(v1_p.autoplay);
+                // console.log(v1_p.autoplay);
+
+                cover.style.display = 'block';
+
             }
 
             // 8.2.1获取右侧关闭按钮
@@ -302,6 +312,7 @@ window.onload = function () {
             close.onclick = function () {
                 v1_w.style.display = '';
                 v1_p.pause();
+                cover.style.display = '';
 
             }
 
@@ -487,12 +498,27 @@ window.onload = function () {
             // })
 
             // 10.1 页面刷新就开始调用秒杀
-            this.fastKill();
+            // this.fastKill();
 
             // 10.2清除上一次计时器并开启新的定时器
             clearInterval(timer2);
             var timer2 = setInterval(this.fastKill, 1000)
 
+            // 11.1小米闪购实现 右侧按钮切换商品区域
+            var right_change = document.querySelector('.change_btns .right');
+            var left_change = document.querySelector('.change_btns .left');
+            var move_bx = document.querySelector('.right_contentBox .move_bx');
+            right_change.onclick = function () {
+
+                move_bx.style.left = -992 + 'px';
+
+            }
+
+            left_change.onclick = function () {
+
+                move_bx.style.left = 0 + 'px';
+
+            }
 
 
 
@@ -719,60 +745,110 @@ window.onload = function () {
                 // 计算当前时间转换成秒之后的值
                 var h = self.getCurrentTime().h * 3600;
                 var m = self.getCurrentTime().m * 60;
-                var s = self.getCurrentTime().s;
+                var s = Number(self.getCurrentTime().s); //bug修正
                 var sum = h + m + s;
+
+                // console.log('*******************************')
+                // console.log('h = ' + h + ' ');
+                // console.log('m = ' + m + ' ');
+                // console.log('s = ' + s + ' ');
+                // console.log('sum = ' + sum + ' ');
 
                 // 计算差值并取绝对值
                 // sum = Math.abs(sum - t19);
 
-
                 if (sum >= t10 && sum < t14) {
-                    // 十点场
-                    level.innerText = '10' + level.innerText.substr(2);
+                    // 10点场
+                    if (level.innerText.substr(0, 2) != 10) {
+                        // 判断当前显示场数是否是当前场，如果是则不再重复更改
+                        level.innerText = '10' + level.innerText.substr(2);
+                    }
 
                     if (sum < 12 * 3600) {
-                        sum = Math.abs(sum - t10)
-                        timeTips.innerText = '距离本场结束时间还有';
+                        // 计算当前时间到结束时间之间的秒数
+                        sum = Math.abs(sum - 12 * 3600)
+                        // timeTips.innerText = '距离本场结束时间还有';
+                        self.detectTips(timeTips, true);
                     } else {
                         sum = Math.abs(sum - t14)
-                        timeTips.innerText = '距离下场开始时间还有';
+
+                        // if (level.innerText.substr(0, 2) != 14) {
+                        //     level.innerText = '14' + level.innerText.substr(2);
+                        // }
+
+                        // timeTips.innerText = '距离下场开始时间还有';
+                        self.detectTips(timeTips);
                     }
 
 
                 } else if (sum >= 14 && sum < t18) {
                     // 14点场
-                    level.innerText = '14' + level.innerText.substr(2);
+                    // console.log(level.innerText.substr(0, 2));
+
+                    if (level.innerText.substr(0, 2) != 14) {
+                        level.innerText = '14' + level.innerText.substr(2);
+                    }
 
                     if (sum < 16 * 3600) {
-                        sum = Math.abs(sum - t14)
-                        timeTips.innerText = '距离本场结束时间还有';
+                        sum = Math.abs(sum - 16 * 3600)
+
+                        // if (timeTips.innerText !== '距离本场结束时间还有') {
+                        //     timeTips.innerText = '距离本场结束时间还有';
+                        // }
+
+                        self.detectTips(timeTips, true);
+
                     } else {
                         sum = Math.abs(sum - t18)
-                        timeTips.innerText = '距离下场开始时间还有';
+
+                        // if (level.innerText.substr(0, 2) != 18) {
+                        //     level.innerText = '18' + level.innerText.substr(2);
+                        // }
+
+                        // if (timeTips.innerText !== '距离下场开始时间还有') {
+                        //     timeTips.innerText = '距离下场开始时间还有';
+                        // }
+                        self.detectTips(timeTips);
                     }
 
                 } else if (sum >= 18 && sum < t22) {
                     // 18点场
-                    level.innerText = '18' + level.innerText.substr(2);
-
+                    if (level.innerText.substr(0, 2) != 18) {
+                        level.innerText = '18' + level.innerText.substr(2);
+                    }
                     if (sum < 20 * 3600) {
-                        sum = Math.abs(sum - t18)
-                        timeTips.innerText = '距离本场结束时间还有';
+                        sum = Math.abs(sum - 20 * 3600)
+                        // timeTips.innerText = '距离本场结束时间还有';
+                        self.detectTips(timeTips, true);
                     } else {
                         sum = Math.abs(sum - t22)
-                        timeTips.innerText = '距离下场开始时间还有';
+
+                        // if (level.innerText.substr(0, 2) != 22) {
+                        //     level.innerText = '22' + level.innerText.substr(2);
+                        // }
+
+                        // timeTips.innerText = '距离下场开始时间还有';
+                        self.detectTips(timeTips);
                     }
 
                 } else {
                     // 22点场
-                    level.innerText = '20' + level.innerText.substr(2);
-
+                    if (level.innerText.substr(0, 2) != 22) {
+                        level.innerText = '20' + level.innerText.substr(2);
+                    }
                     if (sum < 24 * 3600) {
-                        sum = Math.abs(sum - t22)
-                        timeTips.innerText = '距离本场结束时间还有';
+                        sum = Math.abs(sum - 24 * 3600)
+                        // timeTips.innerText = '距离本场结束时间还有';
+                        self.detectTips(timeTips, true);
                     } else {
-                        sum = t10;
-                        timeTips.innerText = '距离下场开始时间还有';
+                        sum = Math.abs(sum - t10);
+
+                        // if (level.innerText.substr(0, 2) != 10) {
+                        //     level.innerText = '10' + level.innerText.substr(2);
+                        // }
+
+                        // timeTips.innerText = '距离下场开始时间还有';
+                        self.detectTips(timeTips);
                     }
                 }
 
@@ -781,15 +857,98 @@ window.onload = function () {
                 m = parseInt((sum % 3600) / 60);
                 s = sum % 3600 % 60;
 
+                var f1, f2;
+
+                if (s == 59) { //此处 不能用 s==0  因为当秒还是0的时候，分钟还未产生变化
+                    f1 = true; // 分钟是在秒钟变成 59的同时变化的，因此 这里应该是 59
+                } else {
+                    f1 = false;
+                }
+
+                if (m == 59) {
+                    f2 = true;
+                } else {
+                    f2 = false;
+                }
+
+
                 h = h >= 10 ? h : '0' + h;
                 m = m >= 10 ? m : '0' + m;
                 s = s >= 10 ? s : '0' + s;
 
 
-                timeBox[0].innerText = h;
-                timeBox[1].innerText = m;
+                // h = (parseInt(sum / 3600)) >= 10 ? h : '0' + h;
+                // m = (parseInt((sum % 3600) / 60)) >= 10 ? m : '0' + m;
+                // s = (sum % 3600 % 60) >= 10 ? s : '0' + s;
+
+
+                // // 改版    取消 2019年9月4日17:04:11
+                // if (h < 10) {
+                //     h = '0' + h;
+                // }
+
+                // if (m < 10) {
+                //     m = '0' + m;
+                // }
+
+                // if (s < 10) {
+                //     s = '0' + s;
+                // }
+
+
+                if (self.flag) {
+                    // 该段代码只在页面刷新后执行1次
+                    timeBox[0].innerText = h;
+                    timeBox[1].innerText = m;
+                    self.flag = false;
+                }
+
+
+                if (f1) {
+                    timeBox[1].innerText = m;
+
+                }
+
+                if (f2) {
+                    timeBox[0].innerText = h;
+                }
+
                 timeBox[2].innerText = s;
 
+
+                // timeBox[0].innerText = h;
+                // timeBox[1].innerText = m;
+                // timeBox[2].innerText = s;
+            }
+
+            // 封装小米闪购提示信息判断
+            this.detectTips = function (value, mode) {
+
+                var val1 = '距离本场结束时间还有';
+                var val2 = '距离下场开始时间还有';
+
+                // if (timeTips.innerText !== ) {
+                //     timeTips.innerText = '距离本场结束时间还有';
+                // }
+
+                // if (timeTips.innerText !== '距离下场开始时间还有') {
+                //     timeTips.innerText = '距离下场开始时间还有';
+                // }
+
+                if (mode) {
+
+                    if (value.innerText !== val1) {
+                        value.innerText = val1;
+                    }
+
+                } else {
+                    if (value.innerText !== val2) {
+                        value.innerText = val2;
+                    }
+                }
+
+
+                // console.log(value);
             }
         }
 
